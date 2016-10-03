@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.MSR.CNTK.Extensibility.Managed;
 
-namespace ComputerVision.Core
+namespace ComputerVision.Core.ImageEvaluation
 {
     /// <summary>
     /// This class provides an Eval model wrapper to restrict model evaluation calls to one at a time.

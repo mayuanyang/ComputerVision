@@ -1,12 +1,12 @@
 ﻿@model ComputerVision.Mvc.Models.ImageClassifierModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Computer Vision";
 }
 
 <div class="jumbotron">
-    <h1>Computer Vision</h1>
+    <h2>Computer Vision</h2>
     <p class="lead"></p>
-    <p></p>
+    
 </div>
 
 <div class="row">
@@ -44,7 +44,22 @@
                 @for (int i =0; i < Model.Output.Count; i++)
                 {
                     <tr>
-                        <td>@((i == 0) ? "Horse" : "Lion")</td>
+                        <td>
+                            @if (i == 0)
+                            {
+                                <span>Horse</span>;
+
+                            }
+                            else if (i == 1)
+                            {
+                                <span>Lion</span>
+                                
+                            }
+                            else
+                            {
+                                <span>Other</span>;
+                            }
+                        </td>
                         <td>@Model.Output[i]</td>
                     </tr>
                 }
