@@ -1,31 +1,55 @@
-﻿@{
+﻿@model ComputerVision.Mvc.Models.ImageClassifierModel
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Computer Vision</h1>
+    <p class="lead"></p>
+    <p></p>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <h2>Getting started</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Please upload a image
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="file" name="file" class="btn btn-default" />
+            <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-success" />
+            
+        }
+        @if (Model != null)
+        {
+            <img src="@Model.ImageData" class="img-responsive" alt="Responsive image">
+        }
+        
+        
+
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-md-6">
+        <h2>Image Classifier</h2>
+        @if (Model != null)
+        {
+            <p>Class:@Model.Category</p>
+            <p>Description:@Model.Description</p>
+            
+            <table class="table">
+                <tr>
+                    <th>Class</th>
+                    <th>Percentage</th>
+                </tr>
+                @for (int i =0; i < Model.Output.Count; i++)
+                {
+                    <tr>
+                        <td>@((i == 0) ? "Horse" : "Lion")</td>
+                        <td>@Model.Output[i]</td>
+                    </tr>
+                }
+            </table>
+        }
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+
 </div>
