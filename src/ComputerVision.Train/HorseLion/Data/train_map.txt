@@ -13,6 +13,8 @@ Data\0011.jpg	0
 Data\0012.jpg	0
 Data\0013.jpg	0
 Data\0014.jpg	0
+Data\0030.jpg	0
+Data\0031.jpg	0
 Data\0015.jpg	1
 Data\0016.jpg	1
 Data\0017.jpg	1
