@@ -3,7 +3,7 @@
 *npm-debug.log
 artifacts/
 /PrintQuote.Angular/app/dist/
-
+**/HorseLion/Models
 #OS junk files
 [Tt]humbs.db
 *.DS_Store
