@@ -25,7 +25,7 @@ TrainConvNet = {
                 p = MaxPoolingLayer {(3:3), stride = (2:2)} (c)
             }.p
             featNorm = features - Constant (128)
-            p1 = MyLayer (featNorm, 128, 0.0043)
+            p1 = MyLayer (featNorm, 64, 0.0043)
             p2 = MyLayer (p1,       128, 1.414)
             p3 = MyLayer (p2,       128, 1.414)
 			
@@ -49,7 +49,8 @@ TrainConvNet = {
         labelNodes      = (labels)
         criterionNodes  = (ce)
         evaluationNodes = (errs)
-        outputNodes 	= (z) 	# outputNodes     = (Softmax(z))  
+        # outputNodes 	= (z) 	# 
+		outputNodes     = (Softmax(z))  
     }
 
     SGD = {
