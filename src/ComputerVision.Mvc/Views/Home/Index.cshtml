@@ -41,26 +41,13 @@
                     <th>Class</th>
                     <th>Percentage</th>
                 </tr>
-                @for (int i =0; i < Model.Output.Count; i++)
+                @foreach(var item in Model.Output)
                 {
                     <tr>
                         <td>
-                            @if (i == 0)
-                            {
-                                <span>Horse</span>;
-
-                            }
-                            else if (i == 1)
-                            {
-                                <span>Lion</span>
-                                
-                            }
-                            else
-                            {
-                                <span>Other</span>;
-                            }
+                           <span>@item.Key</span>
                         </td>
-                        <td>@Model.Output[i]</td>
+                        <td>@item.Value</td>
                     </tr>
                 }
             </table>

@@ -1,0 +1,29 @@
+﻿@model ComputerVision.Mvc.Models.ImageClassifierModel
+@{
+    ViewBag.Title = "ResNet";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Getting started</h2>
+        <p>
+            Please upload a image
+        </p>
+        @using (Html.BeginForm("Upload", "ResNet", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="file" name="file" class="btn btn-default" />
+            <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-success" />
+
+        }
+        @if (Model != null)
+        {
+            <img src="@Model.ImageData" class="img-responsive" alt="Responsive image">
+        }
+
+
+
+    </div>
+    
+
+</div>

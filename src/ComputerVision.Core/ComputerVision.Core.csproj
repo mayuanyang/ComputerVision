@@ -66,7 +66,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EvalWrapper, Version=0.0.0.0, Culture=neutral, PublicKeyToken=52681d72504348ec, processorArchitecture=AMD64">
-      <HintPath>packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.1\lib\net45\x64\EvalWrapper.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\lib\net45\x64\EvalWrapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -81,7 +81,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandlers\EvaluateImageQueryHandler.cs" />
+    <Compile Include="Models\CIFAR10\Cifar10.cs" />
+    <Compile Include="QueryHandlers\EvaluateImageQueryHandler.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="ImageEvaluation\CntkBitmapExtensions.cs" />
     <Compile Include="CoreAssembly.cs" />
@@ -108,7 +109,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.1\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.1\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets'))" />
   </Target>
+  <Import Project="..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets" Condition="Exists('..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

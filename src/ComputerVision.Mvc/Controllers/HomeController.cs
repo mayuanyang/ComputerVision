@@ -34,10 +34,10 @@ namespace ComputerVision.Mvc.Controllers
             
             if (Request.Files.Count > 0)
             {
-                var modelFilePath = Path.Combine(Server.MapPath("~/PreTrainedModel/"), "model.cmf");
+                var modelFilePath = Path.Combine(Server.MapPath("~/PreTrainedModel/"), "cifar10.ResNet.cmf");
 
                 var file = Request.Files[0];
-                var result = await _bus.QueryAsync(new EvaluateImageQuery(modelFilePath, file.InputStream));
+                var result = await _bus.QueryAsync(new EvaluateImageQuery(modelFilePath, file.InputStream, 32, 32));
                 
                 var target = new MemoryStream();
                 file.InputStream.Position = 0;

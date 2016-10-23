@@ -17,7 +17,7 @@
     <AssemblyName>ComputerVision.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -75,7 +75,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EvalWrapper, Version=0.0.0.0, Culture=neutral, PublicKeyToken=52681d72504348ec, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.1\lib\net45\x64\EvalWrapper.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\lib\net45\x64\EvalWrapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -204,6 +204,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResNetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -271,6 +272,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ResNet\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -311,7 +313,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>21158</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost</IISUrl>
+          <IISUrl>http://localhost:21158/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -327,9 +329,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.1\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.1\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets'))" />
   </Target>
-  <Import Project="..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.1\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets" Condition="Exists('..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.1\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets')" />
+  <Import Project="..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets" Condition="Exists('..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\build\net45\Microsoft.Research.CNTK.CpuEval-mkl.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
