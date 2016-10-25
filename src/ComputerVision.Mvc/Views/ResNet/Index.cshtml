@@ -4,6 +4,7 @@
 }
 
 
+
 <div class="row">
     <div class="col-md-6">
         <h2>Getting started</h2>
@@ -22,8 +23,29 @@
         }
 
 
-
     </div>
-    
+    <div class="col-md-6">
+        <h2>Image Classifier</h2>
+        @if (Model != null)
+        {
+            <p>Class:@Model.Category</p>
+            <p>Description:@Model.Description</p>
 
+            <table class="table">
+                <tr>
+                    <th>Class</th>
+                    <th>Percentage</th>
+                </tr>
+                @foreach (var item in Model.Output)
+                {
+                    <tr>
+                        <td>
+                            <span>@item.Key</span>
+                        </td>
+                        <td>@item.Value</td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
 </div>

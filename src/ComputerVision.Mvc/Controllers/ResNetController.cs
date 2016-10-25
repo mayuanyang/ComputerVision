@@ -29,7 +29,7 @@ namespace ComputerVision.Mvc.Controllers
 
             if (Request.Files.Count > 0)
             {
-                var modelFilePath = Path.Combine(Server.MapPath("~/PreTrainedModel/"), "ResNet_34.model");
+                var modelFilePath = Path.Combine(Server.MapPath("~/PreTrainedModel/"), "ResNet_152.model");
 
                 var file = Request.Files[0];
                 var result = await _bus.QueryAsync(new EvaluateImageQuery(modelFilePath, file.InputStream, 224, 224));
@@ -38,19 +38,8 @@ namespace ComputerVision.Mvc.Controllers
                 file.InputStream.Position = 0;
                 file.InputStream.CopyTo(target);
                 byte[] data = target.ToArray();
-                string label = "Other";
-                switch (result.MatchingResultIndex)
-                {
-                    case 0:
-                        label = "Horse";
-                        break;
-                    case 1:
-                        label = "Lion";
-                        break;
-                }
-
-
-                var viewModel = new ImageClassifierModel(label, "", $"data:image/gif;base64,{Convert.ToBase64String(data)}", result.Outputs);
+                
+                var viewModel = new ImageClassifierModel("", "", $"data:image/gif;base64,{Convert.ToBase64String(data)}", result.Outputs);
                 return RedirectToAction("Index", viewModel);
                 
             }

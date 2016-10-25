@@ -1,0 +1,40 @@
+modelPath = "newmodel.cmf"
+
+Train = {
+    action = "train"
+    
+    BrainScriptNetworkBuilder = {
+        
+		labelDim = 10
+        network     = BS.Network.Load ("cifar10.ResNet.cmf")
+        existing       = BS.Network.CloneFunction(network.features, network.z, parameters = "constant")
+                
+		labels   = Input {labelDim}
+                
+        #ce = CrossEntropyWithSoftmax(labels, existing)
+        #errs = ErrorPrediction(existing, existing)
+        
+        #featureNodes    = (features:rois)
+        labelNodes      = (labels)
+        #criterionNodes  = (ce)
+        #evaluationNodes = (errs)
+        outputNodes     = (existing)
+    }
+
+    SGD = {
+        epochSize = 0
+        minibatchSize = 2
+        maxEpochs = 15
+        
+        learningRatesPerSample = 0.00005
+        momentumAsTimeConstant = 0*5:1024 # was: 0.9 per MB 
+        L2RegWeight = 0.0001
+        dropoutRate = 0.5
+        
+        numMBsToShowResult = 50
+    }
+
+    reader = {
+        
+    }
+}

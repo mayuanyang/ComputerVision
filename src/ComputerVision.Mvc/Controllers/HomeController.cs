@@ -43,19 +43,8 @@ namespace ComputerVision.Mvc.Controllers
                 file.InputStream.Position = 0;
                 file.InputStream.CopyTo(target);
                 byte[] data = target.ToArray();
-                string label = "Other";
-                switch (result.MatchingResultIndex)
-                {
-                    case 0:
-                        label = "Horse";
-                        break;
-                    case 1:
-                        label = "Lion";
-                        break;
-                }
                 
-            
-                var viewModel = new ImageClassifierModel(label, "", $"data:image/gif;base64,{Convert.ToBase64String(data)}", result.Outputs);
+                var viewModel = new ImageClassifierModel("", "", $"data:image/gif;base64,{Convert.ToBase64String(data)}", result.Outputs);
                 return View("Index", viewModel);
             }
             
