@@ -11,7 +11,6 @@ namespace ComputerVision.Mvc.Controllers
     public class ResNetController : Controller
     {
         private readonly IMicroBus _bus;
-
         public ResNetController(IMicroBus bus)
         {
             _bus = bus;
