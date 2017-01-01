@@ -5,30 +5,32 @@ using System.Threading.Tasks;
 using ComputerVision.Core.ImageEvaluation;
 using ComputerVision.Core.Models.CIFAR10;
 using ComputerVision.Messages;
-using Enexure.MicroBus;
+using Mediator.Net.Context;
 using Microsoft.MSR.CNTK.Extensibility.Managed;
+using Mediator.Net.Contracts;
 
 namespace ComputerVision.Core.QueryHandlers
 {
-    public class EvaluateImageQueryHandler : IQueryHandler<EvaluateImageQuery, EvaluateImageQueryResult>
+    public class EvaluateImageQueryHandler : IRequestHandler<EvaluateImageQuery, EvaluateImageQueryResult>
     {
       
-        public Task<EvaluateImageQueryResult> Handle(EvaluateImageQuery query)
+     
+        public Task<EvaluateImageQueryResult> Handle(ReceiveContext<EvaluateImageQuery> context)
         {
             using (var model = new IEvaluateModelManagedF())
             {
-                model.CreateNetwork(string.Format("modelPath=\"{0}\"", query.ModelFilePath), deviceId: -1);
+                model.CreateNetwork(string.Format("modelPath=\"{0}\"", context.Message.ModelFilePath), deviceId: -1);
 
                 // Prepare input value in the appropriate structure and size
                 var inDims = model.GetNodeDimensions(NodeGroup.Input);
-                if (inDims.First().Value != query.Width * query.Height * 3)
+                if (inDims.First().Value != context.Message.Width * context.Message.Height * 3)
                 {
                     throw new CNTKRuntimeException(string.Format("The input dimension for {0} is {1} which is not the expected size of {2}.", inDims.First(), inDims.First().Value, 224 * 224 * 3), string.Empty);
                 }
 
-                Bitmap bmp = new Bitmap(query.ImageStream);
+                Bitmap bmp = new Bitmap(context.Message.ImageStream);
 
-                var resized = bmp.Resize(query.Width, query.Height, true);
+                var resized = bmp.Resize(context.Message.Width, context.Message.Height, true);
                 var resizedCHW = resized.ParallelExtractCHW();
                 var inputs = new Dictionary<string, List<float>>() { { inDims.First().Key, resizedCHW } };
 

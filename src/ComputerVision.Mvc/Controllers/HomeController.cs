@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using ComputerVision.Core;
-using ComputerVision.Core.ImageEvaluation;
 using ComputerVision.Messages;
 using ComputerVision.Mvc.Models;
-using Enexure.MicroBus;
-using Microsoft.MSR.CNTK.Extensibility.Managed;
+using Mediator.Net;
 
 namespace ComputerVision.Mvc.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMicroBus _bus;
+        private readonly IMediator _bus;
 
-        public HomeController(IMicroBus bus)
+        public HomeController(IMediator bus)
         {
             _bus = bus;
         }
@@ -37,7 +31,7 @@ namespace ComputerVision.Mvc.Controllers
                 var modelFilePath = Path.Combine(Server.MapPath("~/PreTrainedModel/"), "cifar10.ResNet.cmf");
 
                 var file = Request.Files[0];
-                var result = await _bus.QueryAsync(new EvaluateImageQuery(modelFilePath, file.InputStream, 32, 32));
+                var result = await _bus.RequestAsync<EvaluateImageQuery, EvaluateImageQueryResult>(new EvaluateImageQuery(modelFilePath, file.InputStream, 32, 32));
                 
                 var target = new MemoryStream();
                 file.InputStream.Position = 0;

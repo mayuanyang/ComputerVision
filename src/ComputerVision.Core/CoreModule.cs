@@ -1,5 +1,7 @@
 ﻿using Autofac;
-using Enexure.MicroBus.Autofac;
+using Mediator.Net;
+using Mediator.Net.Autofac;
+
 
 namespace ComputerVision.Core
 {
@@ -8,7 +10,9 @@ namespace ComputerVision.Core
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-            builder.RegisterMicroBus(MicroBusRegistration.GetBusBuilder());
+            var mediatorBuilder = new MediatorBuilder();
+            mediatorBuilder.RegisterHandlers(this.GetType().Assembly);
+            builder.RegisterMediator(mediatorBuilder);
         }
     }
 }

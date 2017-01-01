@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using ComputerVision.Messages;
 using ComputerVision.Mvc.Models;
-using Enexure.MicroBus;
+using Mediator.Net;
 
 namespace ComputerVision.Mvc.Controllers
 {
     public class ResNetController : Controller
     {
-        private readonly IMicroBus _bus;
-        public ResNetController(IMicroBus bus)
+        private readonly IMediator _bus;
+        public ResNetController(IMediator bus)
         {
             _bus = bus;
         }
@@ -31,7 +31,7 @@ namespace ComputerVision.Mvc.Controllers
                 var modelFilePath = Path.Combine(Server.MapPath("~/PreTrainedModel/"), "ResNet_152.model");
 
                 var file = Request.Files[0];
-                var result = await _bus.QueryAsync(new EvaluateImageQuery(modelFilePath, file.InputStream, 224, 224));
+                var result = await _bus.RequestAsync<EvaluateImageQuery, EvaluateImageQueryResult>(new EvaluateImageQuery(modelFilePath, file.InputStream, 224, 224));
 
                 var target = new MemoryStream();
                 file.InputStream.Position = 0;

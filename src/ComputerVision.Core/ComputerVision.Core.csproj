@@ -33,24 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.2.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.2.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ConfigInjector, Version=2.2.1175.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ConfigInjector.2.2.1175.0\lib\net45\ConfigInjector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Enexure.MicroBus, Version=3.3.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Enexure.MicroBus.3.3.3\lib\net451\Enexure.MicroBus.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Enexure.MicroBus.Autofac, Version=3.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Enexure.MicroBus.Autofac.3.2.3\lib\net451\Enexure.MicroBus.Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Enexure.MicroBus.InfrastructureContracts, Version=3.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Enexure.MicroBus.InfrastructureContracts.3.2.2\lib\net451\Enexure.MicroBus.InfrastructureContracts.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Enexure.MicroBus.MessageContracts, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -67,6 +55,14 @@
     </Reference>
     <Reference Include="EvalWrapper, Version=0.0.0.0, Culture=neutral, PublicKeyToken=52681d72504348ec, processorArchitecture=AMD64">
       <HintPath>..\..\packages\Microsoft.Research.CNTK.CpuEval-mkl.1.7.2\lib\net45\x64\EvalWrapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediator.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mediator.Net.0.9.51-beta\lib\net452\Mediator.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediator.Net.Autofac, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mediator.Net.Autofac.0.9.51-beta\lib\net452\Mediator.Net.Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -88,7 +84,6 @@
     <Compile Include="CoreAssembly.cs" />
     <Compile Include="Database\ComputerVisionDbContext.cs" />
     <Compile Include="ImageEvaluation\ModelEvaluator.cs" />
-    <Compile Include="MicroBusRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\ConnectionStringSetting.cs" />
   </ItemGroup>

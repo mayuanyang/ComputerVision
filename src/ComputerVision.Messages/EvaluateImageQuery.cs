@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using Enexure.MicroBus;
+using Mediator.Net.Contracts;
 
 namespace ComputerVision.Messages
 {
-    public class EvaluateImageQuery : IQuery<EvaluateImageQuery, EvaluateImageQueryResult>
+    public class EvaluateImageQuery : IRequest
     {
         public string ModelFilePath { get; set; }
         public Stream ImageStream { get; set; }
