@@ -54,8 +54,8 @@
       <HintPath>..\..\packages\Autofac.Mvc5.4.0.1\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Cntk.Core.Managed-2.0rc1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a82c1f3f67b62253, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\CNTK.GPU.2.0-rc1\lib\net45\x64\Cntk.Core.Managed-2.0rc1.dll</HintPath>
+    <Reference Include="Cntk.Core.Managed-2.0rc2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=21fff2ec8197defe, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\CNTK.CPUOnly.2.0.0-rc2\lib\net45\x64\Cntk.Core.Managed-2.0rc2.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ConfigInjector, Version=2.2.1175.0, Culture=neutral, processorArchitecture=MSIL">
@@ -317,9 +317,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\..\packages\CNTK.GPU.2.0-rc1\build\net45\CNTK.GPU.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CNTK.GPU.2.0-rc1\build\net45\CNTK.GPU.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CNTK.CPUOnly.2.0.0-rc2\build\net45\CNTK.CPUOnly.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CNTK.CPUOnly.2.0.0-rc2\build\net45\CNTK.CPUOnly.targets'))" />
   </Target>
-  <Import Project="..\..\packages\CNTK.GPU.2.0-rc1\build\net45\CNTK.GPU.targets" Condition="Exists('..\..\packages\CNTK.GPU.2.0-rc1\build\net45\CNTK.GPU.targets')" />
+  <Import Project="..\..\packages\CNTK.CPUOnly.2.0.0-rc2\build\net45\CNTK.CPUOnly.targets" Condition="Exists('..\..\packages\CNTK.CPUOnly.2.0.0-rc2\build\net45\CNTK.CPUOnly.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
