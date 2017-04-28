@@ -98,14 +98,14 @@ namespace ComputerVision.Core.QueryHandlers
                     throw new ApplicationException("The number of elements in the sequence is not a multiple of sample size");
                 }
 
-                Console.WriteLine(String.Format("Sequence {0} contains {1} samples.", seqNo++, seq.Count / outputSampleSize));
+                Console.WriteLine($"Sequence {seqNo++} contains {seq.Count / outputSampleSize} samples.");
                 int i = 0;
                 int sampleNo = 0;
                 foreach (var element in seq)
                 {
                     if (i++ % outputSampleSize == 0)
                     {
-                        Console.Write(String.Format("    sample {0}: ", sampleNo));
+                        Console.Write($"    sample {sampleNo}: ");
                     }
                     Console.Write(element);
                     if (i % outputSampleSize == 0)
