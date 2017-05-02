@@ -204,6 +204,7 @@
     <Content Include="PreTrainedModel\cifar10.ResNet.cmf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\ComputerVisionMvc - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ComputerVisionMvcPoc - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <None Include="Properties\PublishProfiles\LocalIIS.pubxml" />

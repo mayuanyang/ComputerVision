@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -19,6 +20,12 @@ namespace ComputerVision.Mvc
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            string pathValue = Environment.GetEnvironmentVariable("PATH");
+            string domainBaseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string cntkPath = domainBaseDir + @"bin\";
+            pathValue += ";" + cntkPath;
+            Environment.SetEnvironmentVariable("PATH", pathValue);
 
             var builder = new ContainerBuilder();
 
