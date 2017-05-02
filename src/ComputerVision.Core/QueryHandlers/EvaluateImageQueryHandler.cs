@@ -16,7 +16,7 @@ namespace ComputerVision.Core.QueryHandlers
 
         public Task<EvaluateImageQueryResult> Handle(ReceiveContext<EvaluateImageQuery> context)
         {
-            EvaluationSingleImage(DeviceDescriptor.CPUDevice, context);
+            EvaluationSingleImage(DeviceDescriptor.GPUDevice(0), context);
             return null;
         }
 
