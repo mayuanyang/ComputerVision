@@ -41,7 +41,7 @@
                     <th>Class</th>
                     <th>Percentage</th>
                 </tr>
-                @foreach(var item in Model.Output)
+                @foreach(var item in Model.Output.OrderByDescending(x => x.Value))
                 {
                     <tr>
                         <td>

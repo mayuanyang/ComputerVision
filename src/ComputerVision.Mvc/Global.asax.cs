@@ -26,6 +26,15 @@ namespace ComputerVision.Mvc
                 .FromAssemblies(CoreAssembly.Assembly)
                 .RegisterWithContainer(configSetting => builder.RegisterInstance(configSetting).AsSelf().SingleInstance())
                 .ExcludeSettingKeys(new[] {
+                    "aspnet:PortableCompilationOutput",
+                    "aspnet:PortableCompilationOutputSnapshotType",
+                    "aspnet:DisableFcnDaclRead",
+                    "WEBSITE_AUTH_ENABLED",
+                    "ScmType",
+                    "WEBSITE_SITE_NAME",
+                    "REMOTEDEBUGGINGVERSION",
+                    "APPINSIGHTS_INSTRUMENTATIONKEY",
+                    "WEBSITE_NODE_DEFAULT_VERSION",
                     "serilog:minimum-level",
                     "webpages:Version",
                     "webpages:Enabled",

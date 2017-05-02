@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using CNTK;
+using ComputerVision.Core.Models.CIFAR10;
 using ComputerVision.Messages;
 using Mediator.Net.Context;
 using Mediator.Net.Contracts;
@@ -16,11 +17,10 @@ namespace ComputerVision.Core.QueryHandlers
 
         public Task<EvaluateImageQueryResult> Handle(ReceiveContext<EvaluateImageQuery> context)
         {
-            EvaluationSingleImage(DeviceDescriptor.GPUDevice(0), context);
-            return null;
+            return EvaluationSingleImage(DeviceDescriptor.CPUDevice, context);
         }
 
-        public static void EvaluationSingleImage(DeviceDescriptor device, ReceiveContext<EvaluateImageQuery> context)
+        public Task<EvaluateImageQueryResult> EvaluationSingleImage(DeviceDescriptor device, ReceiveContext<EvaluateImageQuery> context)
         {
             try
             {
@@ -30,7 +30,8 @@ namespace ComputerVision.Core.QueryHandlers
                 Function modelFunc = Function.LoadModel(modelFilePath, device);
 
                 
-                Variable inputVar = modelFunc.Arguments.Single();
+                //Variable inputVar = modelFunc.Arguments.Single();
+                Variable inputVar = modelFunc.Arguments.First();
 
                 // Get shape data for the input variable
                 NDShape inputShape = inputVar.Shape;
@@ -41,8 +42,10 @@ namespace ComputerVision.Core.QueryHandlers
 
                 // The model has only one output.
                 // If the model have more than one output, use the following way to get output variable by name.
-                // Variable outputVar = modelFunc.Outputs.Where(variable => string.Equals(variable.Name, outputName)).Single();
-                Variable outputVar = modelFunc.Output;
+                Variable outputVar = modelFunc.Outputs.Where(variable => string.Equals(variable.Name, "z")).Single();
+                // Variable outputVar = modelFunc.Output;
+
+                
 
                 var inputDataMap = new Dictionary<Variable, Value>();
                 var outputDataMap = new Dictionary<Variable, Value>();
@@ -50,9 +53,9 @@ namespace ComputerVision.Core.QueryHandlers
                 // Image preprocessing to match input requirements of the model.
                 // This program uses images from the CIFAR-10 dataset for evaluation.
                 // Please see README.md in <CNTK>/Examples/Image/DataSets/CIFAR-10 about how to download the CIFAR-10 dataset.
-                string sampleImage = "00000.png";
                 
-                Bitmap bmp = new Bitmap(Bitmap.FromFile(sampleImage));
+                
+                Bitmap bmp = new Bitmap(context.Message.ImageStream);
                 var resized = bmp.Resize((int)imageWidth, (int)imageHeight, true);
                 List<float> resizedCHW = resized.ParallelExtractCHW();
 
@@ -71,53 +74,26 @@ namespace ComputerVision.Core.QueryHandlers
                 var outputVal = outputDataMap[outputVar];
                 var outputData = outputVal.GetDenseData<float>(outputVar);
 
-                PrintOutput(outputVar.Shape.TotalSize, outputData);
+                var dic = new Dictionary<string, float>();
+                int i = 1;
+                foreach (var value in outputData[0])
+                {
+                    dic.Add(Cifar10.Labels[i], value);
+                    i++;
+                }
+
+                var max = outputData[0].Select((value, index) => new { Value = value, Index = index })
+                    .Aggregate((a, b) => (a.Value > b.Value) ? a : b)
+                    .Index;
+
+                return Task.FromResult(new EvaluateImageQueryResult(dic, max));
+
+                
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: {0}\nCallStack: {1}\n Inner Exception: {2}", ex.Message, ex.StackTrace, ex.InnerException != null ? ex.InnerException.Message : "No Inner Exception");
                 throw ex;
-            }
-        }
-
-        /// <summary>
-        /// Print out the evalaution results.
-        /// </summary>
-        /// <typeparam name="T">The data value type</typeparam>
-        /// <param name="sampleSize">The size of each sample.</param>
-        /// <param name="outputBuffer">The evaluation result data.</param>
-        internal static void PrintOutput<T>(int sampleSize, IList<IList<T>> outputBuffer)
-        {
-            Console.WriteLine("The number of sequences in the batch: " + outputBuffer.Count);
-            int seqNo = 0;
-            int outputSampleSize = sampleSize;
-            foreach (var seq in outputBuffer)
-            {
-                if (seq.Count % outputSampleSize != 0)
-                {
-                    throw new ApplicationException("The number of elements in the sequence is not a multiple of sample size");
-                }
-
-                Console.WriteLine($"Sequence {seqNo++} contains {seq.Count / outputSampleSize} samples.");
-                int i = 0;
-                int sampleNo = 0;
-                foreach (var element in seq)
-                {
-                    if (i++ % outputSampleSize == 0)
-                    {
-                        Console.Write($"    sample {sampleNo}: ");
-                    }
-                    Console.Write(element);
-                    if (i % outputSampleSize == 0)
-                    {
-                        Console.WriteLine(".");
-                        sampleNo++;
-                    }
-                    else
-                    {
-                        Console.Write(",");
-                    }
-                }
             }
         }
     }
