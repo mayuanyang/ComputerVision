@@ -1,5 +1,7 @@
 # ComputerVision  [![Build status](https://ci.appveyor.com/api/projects/status/9ojpbvsa8kyq5r3w?svg=true)](https://ci.appveyor.com/project/mayuanyang/computervision)
 
+[A simple MVC demo is now available in Azure(http://computervisionmvc.azurewebsites.net)]
+
 A C# Convolution Neural Network evaluation by using CNTK
 
 A MVC project that let you upload a image and use CNTK to evaluate it.
